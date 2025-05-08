@@ -1,0 +1,19 @@
+module kmeans(abx,aby,xen,yen,clk,reset);
+input [7:0] abx,aby,abxc,abyc;
+input clk,reset,xen,yen,sl,slc;
+wire [31:0] x1,y1,x2,y2,x11,y11,cavg;
+wire [61:0] edcout;
+wire [5:0] dem;
+wire [1:0] indx;
+wire indxc;
+xinput i1(abx,clk,x1);
+yinput i2(aby,clk,y1);
+xcinput i3(abxc,clk,x11,xen,x2);
+ycinput i4(abyc,clk,y11,yen,y2);
+EDC p1(x1,x2,y1,y2,edcout,clk,reset);
+MFB p2(edcout,indx,indxc,clk,reset);
+mux8b2x1 i5(x1,cavg,slc,x11);
+mux8b2x1 i6(y1,cavg,slc,y11);
+AB p4(x1,y1,dem,sl,cavg,clk,reset);
+endmodule
+

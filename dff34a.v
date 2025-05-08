@@ -1,0 +1,13 @@
+module dff34a (
+	 input  [63:0] D,          // 34-bit data input
+    output reg [63:0] Q,
+    input  clk,               // Clock input
+    input  reset             // Synchronous reset input            // 34-bit data output
+);
+    always @(posedge clk) begin
+        if (reset) 
+            Q <= 64'b1111111111111111111111111111111111111111111111111111111111111111;           // Reset the output to 0
+        else 
+            Q <= D;               // Capture the input on the rising edge of the clock
+    end
+endmodule

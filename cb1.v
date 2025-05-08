@@ -1,0 +1,25 @@
+module cb1(ad,ab,indc,indx,sl,cw,about,clk,reset);
+input [1:0] indx,sl;
+input [15:0] ab;
+input [6:0] ad;
+output [15:0] about;
+input indc;
+input clk,reset;
+output [5:0] cw;
+wire   [2:0] cn ;
+wire enable;
+wire [15:0] ab1w1,ab1w2,ab1w3,ab1w;
+wire [5:0] co0,co1,co2;
+demux a1(indc,indx,cn);
+counterinbits c1(clk,reset,cn[0],co0);
+counterinbits c2(clk,reset,cn[1],co1);
+counterinbits c3(clk,reset,cn[2],co2);
+mux a2(co0,co1,co2,sl,cw);
+count5 co5(clk,reset,enable);
+dff_16 fl(enable, reset,ab,ab1w);
+cm1 mem1(ad,clk,ab1w,cn[0],ab1w1);
+cm2 mem2(ad,clk,ab1w,cn[1],ab1w2);
+cm3 mem3(ad,clk,ab1w,cn[2],ab1w3);
+mux16 one(ab1w1,ab1w2,ab1w3,sl,about);
+endmodule
+

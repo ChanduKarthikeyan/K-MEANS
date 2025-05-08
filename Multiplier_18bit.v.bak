@@ -1,0 +1,10 @@
+module Multiplier_18bit(
+    input [17:0] A,       // 18-bit input A
+    input [17:0] B,       // 18-bit input B
+    output [35:0] Result  // 36-bit result of multiplication
+);
+
+    // Perform multiplication
+    assign Result = A * B;
+
+endmodule

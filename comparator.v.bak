@@ -1,0 +1,22 @@
+module comparator (
+    input [35:0] ain, bin,   // 34-bit input numbers
+    output reg lout,         // Output high if ain < bin
+    output reg gout,         // Output high if ain > bin
+    output reg eout          // Output high if ain == bin
+);
+    always @(*) begin
+        if (ain < bin) begin
+            lout = 1'b1;     // Set lout if ain < bin
+            eout = 1'b0;
+            gout = 1'b0;
+        end else if (ain == bin) begin
+            lout = 1'b0;
+            eout = 1'b1;     // Set eout if ain == bin
+            gout = 1'b0;
+        end else begin
+            lout = 1'b0;
+            eout = 1'b0;
+            gout = 1'b1;     // Set gout if ain > bin
+        end
+  end
+endmodule

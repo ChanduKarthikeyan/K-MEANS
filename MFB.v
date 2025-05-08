@@ -1,0 +1,20 @@
+module MFB (in,indx,indxc,clk,reset);
+input [63:0] in;
+input clk,reset;
+wire [63:0] ain,bin,out;
+output [1:0] indx;
+output  indxc;
+wire l,g,e,tc;
+wire [1:0] cout;
+dff34 a1(in,bin,clk,reset);
+dff34a a2(out,ain,clk,tc || reset);
+comparator a3(ain,bin,l,g,e);
+mux32b2x1 a4(ain,bin,g,out);
+counter_2bit a5(cout,tc,clk,reset);
+dff2 a6(cout,indx,clk,reset,g);
+or a7(le,l,e);
+and (indxc,le,tc);
+endmodule
+
+
+

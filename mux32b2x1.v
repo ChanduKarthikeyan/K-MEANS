@@ -1,0 +1,8 @@
+module mux32b2x1 (
+    input [63:0] ain,       // 34-bit Input 0
+    input [63:0] bin,       // 34-bit Input 1
+    input sel,              // 1-bit Select signal
+    output [63:0] out       // 34-bit Output
+);
+    assign out = (sel == 1'b0) ? ain : bin; // Select between ain and bin based on sel
+endmodule
